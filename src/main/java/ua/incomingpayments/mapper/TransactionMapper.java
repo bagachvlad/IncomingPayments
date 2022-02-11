@@ -7,6 +7,8 @@ import ua.incomingpayments.entity.Account;
 import ua.incomingpayments.entity.Status;
 import ua.incomingpayments.entity.Transaction;
 
+import java.util.UUID;
+
 @Service
 public class TransactionMapper {
 
@@ -42,4 +44,8 @@ public class TransactionMapper {
         return dto;
     }
 
+    private void populateId(RequestDto dto) {
+        UUID id = UUID.randomUUID();
+        dto.setRequestId(id);
+    }
 }
