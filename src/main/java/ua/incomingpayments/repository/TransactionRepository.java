@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import ua.incomingpayments.entity.Transaction;
 
 @Repository
-public interface TransactionRepository extends JpaRepository<Transaction , Integer> {
+public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
 
 }

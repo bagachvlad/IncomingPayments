@@ -1,6 +1,6 @@
 package ua.incomingpayments.exceptions;
 
-public class FieldNotFoundException extends RuntimeException{
+public class FieldNotFoundException extends RuntimeException {
 
     public FieldNotFoundException() {
     }

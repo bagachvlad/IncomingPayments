@@ -8,16 +8,16 @@ import java.util.Objects;
 public class Status {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "transaction_generator")
-    @SequenceGenerator(name = "transaction_generator" , sequenceName = "transaction_seq" , allocationSize = 150)
-    @Column( updatable = false ,
-            nullable = false ,
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_generator")
+    @SequenceGenerator(name = "transaction_generator", sequenceName = "transaction_seq", allocationSize = 150)
+    @Column(updatable = false,
+            nullable = false,
             columnDefinition = "smallserial")
     private Short id;
 
     @Column(
-            nullable = false ,
-            unique = true ,
+            nullable = false,
+            unique = true,
             columnDefinition = "text")
     private String value;
 

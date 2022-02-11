@@ -23,6 +23,6 @@ public class TransactionController {
 
     @PostMapping("/moneyTransaction")
     public ResponseDto moneyTransaction(@RequestBody RequestDto dto) {
-       return service.paymentTransaction(dto);
+        return service.paymentTransaction(dto);
     }
 }

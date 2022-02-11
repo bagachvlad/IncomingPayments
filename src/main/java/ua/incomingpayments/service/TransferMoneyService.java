@@ -13,7 +13,6 @@ import ua.incomingpayments.repository.StatusRepository;
 import ua.incomingpayments.repository.TransactionRepository;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 @Service
 public class TransferMoneyService {

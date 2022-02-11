@@ -41,7 +41,7 @@ public class AccountValidator implements Validator<RequestDto> {
         String invalidFieldName = ex.getInvalidFieldName();
         String invalidValue = ex.getInvalidValue();
         String reason = ex.getReason();
-        return String.format(VALIDATION_EXCEPTION_PATTERN , invalidFieldName, invalidValue, reason);
+        return String.format(VALIDATION_EXCEPTION_PATTERN, invalidFieldName, invalidValue, reason);
     }
 
     private void validateFields(RequestDto dto, Account account) {

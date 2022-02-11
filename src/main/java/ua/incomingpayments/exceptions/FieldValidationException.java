@@ -1,6 +1,6 @@
 package ua.incomingpayments.exceptions;
 
-public class FieldValidationException extends RuntimeException{
+public class FieldValidationException extends RuntimeException {
 
     private final String invalidFieldName;
     private final String invalidValue;

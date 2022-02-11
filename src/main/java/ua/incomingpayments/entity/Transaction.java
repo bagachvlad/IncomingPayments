@@ -10,16 +10,16 @@ import java.util.UUID;
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "transaction_generator")
-    @SequenceGenerator(name = "transaction_generator" , sequenceName = "transaction_seq" , allocationSize = 150)
-    @Column( updatable = false ,
-            nullable = false ,
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_generator")
+    @SequenceGenerator(name = "transaction_generator", sequenceName = "transaction_seq", allocationSize = 150)
+    @Column(updatable = false,
+            nullable = false,
             columnDefinition = "INTEGER")
     private Integer id;
 
     @Column(
             name = "request_id",
-            nullable = false ,
+            nullable = false,
             columnDefinition = "UUID"
     )
     private UUID requestId;
@@ -33,7 +33,7 @@ public class Transaction {
     private Account accountTo;
 
     @Column(
-            nullable = false ,
+            nullable = false,
             columnDefinition = "numeric(10, 2)")
     private BigDecimal amount;
 

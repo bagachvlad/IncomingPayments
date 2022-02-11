@@ -10,13 +10,11 @@ import ua.incomingpayments.exceptions.FieldNotFoundException;
 import ua.incomingpayments.exceptions.SuchRequestAlreadyExists;
 import ua.incomingpayments.exceptions.ValidationException;
 import ua.incomingpayments.mapper.TransactionMapper;
-import ua.incomingpayments.repository.TransactionRepository;
 import ua.incomingpayments.validation.AccountValidator;
 import ua.incomingpayments.validation.TransactionValidator;
 
 @Service
 public class TransactionService {
-
 
     private static final Logger LOG = LoggerFactory.getLogger(TransactionService.class);
 
