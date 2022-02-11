@@ -7,6 +7,7 @@ import ua.incomingpayments.dto.RequestDto;
 import ua.incomingpayments.dto.ResponseDto;
 import ua.incomingpayments.entity.Transaction;
 import ua.incomingpayments.exceptions.FieldNotFoundException;
+import ua.incomingpayments.exceptions.SuchRequestAlreadyExists;
 import ua.incomingpayments.exceptions.ValidationException;
 import ua.incomingpayments.mapper.TransactionMapper;
 import ua.incomingpayments.repository.TransactionRepository;
@@ -26,40 +27,51 @@ public class TransactionService {
     private final AccountValidator accountValidator;
     private final TransactionMapper mapper;
     private final TransactionValidator transactionValidator;
-    private final TransactionRepository repository;
     private final TransferMoneyService service;
 
-    public TransactionService(AccountValidator accountValidator, TransactionMapper mapper, TransactionValidator transactionValidator, TransactionRepository repository, TransferMoneyService service) {
+    public TransactionService(AccountValidator accountValidator, TransactionMapper mapper, TransactionValidator transactionValidator, TransferMoneyService service) {
         this.accountValidator = accountValidator;
         this.mapper = mapper;
         this.transactionValidator = transactionValidator;
-        this.repository = repository;
         this.service = service;
     }
 
-    public void requestValid(RequestDto dto){
-        if(!isRequestDtoValid(dto)){
+    public void requestValid(RequestDto dto) {
+        if (!isRequestDtoAccountValid(dto)) {
             throw new FieldNotFoundException();
+        }
+        if (isRequestDtoIdValid(dto)) {
+            throw new SuchRequestAlreadyExists();
         }
     }
 
-    public ResponseDto paymentTransaction(RequestDto dto){
+    public ResponseDto paymentTransaction(RequestDto dto) {
 
         Transaction transaction = service.saveTransaction(dto);
         ResponseDto responseDto = new ResponseDto();
         responseDto.setResult(transaction.getStatus().getValue());
-        if(!responseDto.getResult().equals("ERROR")){
+        if (!responseDto.getResult().equals("ERROR")) {
             responseDto.setDescription(TRANSACTION_FAILED_PATTERN);
         }
         responseDto.setDescription(TRANSACTION_SUCCESS_PATTERN);
         return mapper.mapTransactionToDto(transaction);
     }
 
-    private boolean isRequestDtoValid(RequestDto dto){
-        try{
+    private boolean isRequestDtoAccountValid(RequestDto dto) {
+        try {
             accountValidator.validate(dto);
+        } catch (ValidationException ex) {
+            String message = String.format(VALIDATION_FAILED_PATTERN, ex.getMessage());
+            LOG.warn(message);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isRequestDtoIdValid(RequestDto dto) {
+        try {
             transactionValidator.validate(dto);
-        }catch (ValidationException ex) {
+        } catch (ValidationException ex) {
             String message = String.format(VALIDATION_FAILED_PATTERN, ex.getMessage());
             LOG.warn(message);
             return false;
