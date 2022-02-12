@@ -38,7 +38,7 @@ public class TransactionService {
         if (!isRequestDtoAccountValid(dto)) {
             throw new FieldNotFoundException();
         }
-        if (isRequestDtoIdValid(dto)) {
+        if (!isRequestDtoIdValid(dto)) {
             throw new SuchRequestAlreadyExists();
         }
     }
